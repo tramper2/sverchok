@@ -244,6 +244,7 @@
     SvInputSwitchNode
     SvNeuroElman1LNode
     SvCustomSwitcher
+    SvThreeDPanelParameterSet
 
 ## Viz
     ViewerNode2

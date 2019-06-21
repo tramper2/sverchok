@@ -203,8 +203,8 @@ class SvLayoutScanProperties(bpy.types.Operator):
                         templist.append([node.label, node.name, ""])
                 
                 elif idname in {'SvNumberNode', 'IntegerNode', 'FloatNode', 'SvListInputNode', 'SvColorInputNode',
-                                'SvBmeshViewerNodeMK2', 'SvCustomSwitcher'}:
-                    if idname not in {'SvBmeshViewerNodeMK2', 'SvCustomSwitcher'}:
+                                'SvBmeshViewerNodeMK2', 'SvCustomSwitcher', 'SvThreeDPanelParameterSet'}:
+                    if idname not in {'SvBmeshViewerNodeMK2', 'SvCustomSwitcher', 'SvThreeDPanelParameterSet'}:
                         if not node.outputs:
                             debug("Node %s does not have outputs", node.name)
                             continue
@@ -217,6 +217,10 @@ class SvLayoutScanProperties(bpy.types.Operator):
                     elif idname == 'SvCustomSwitcher':
                         if not node.inputs[0].is_linked and not node.outputs[0].is_linked or (node.to3d != True):
                             debug("Node %s: output or input are not linked", node.name)
+                            continue
+                    elif idname == 'SvThreeDPanelParameterSet':
+                        if node.outputs[0].is_linked:
+                            debug("Node %s: is sub set of other node - skip", node.name)
                             continue
                     elif (node.to3d != True):
                         debug("Node %s: first output is not linked or to3d == False", node.name)
@@ -239,6 +243,8 @@ class SvLayoutScanProperties(bpy.types.Operator):
                             templist.append([node.label, node.name, 'float_list'])
                     elif 'SvCustomSwitcher' in idname:
                         templist.append([node.label, node.name, 'user_list'])
+                    elif 'SvThreeDPanelParameterSet' in idname:
+                        templist.append([node.label, node.name, 'show'])
                     else:
                         kind = node.selected_mode
                         templist.append([node.label, node.name, kind + '_'])

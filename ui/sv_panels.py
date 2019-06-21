@@ -262,6 +262,9 @@ class Sv3DPanel(bpy.types.Panel):
                         elif node.bl_idname in {'SvCustomSwitcher'}:
                             node.draw_buttons_3dpanel(col)
 
+                        elif node.bl_idname in {'SvThreeDPanelParameterSet'}:
+                            node.draw_buttons_3dpanel(col)
+
                     # Import/Export properties
                     row = col.row(align=True)
                     row.label(text='Export/Import:')
