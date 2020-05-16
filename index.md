@@ -374,6 +374,7 @@
     ---
     SvHomogenousVectorField
     SvFieldRandomProbeNode
+    SvPopulateSurfaceNode
     SvNoiseNodeMK2
     SvTurbulenceNode
     SvLacunarityNode
